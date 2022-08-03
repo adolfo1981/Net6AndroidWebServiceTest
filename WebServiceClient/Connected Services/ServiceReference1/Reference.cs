@@ -24,8 +24,16 @@ namespace ServiceReference1
     public interface WebServiceSoap
     {
         
+        // CODEGEN: Generating message contract since element name HelloWorldResult from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/HelloWorld", ReplyAction="*")]
+        ServiceReference1.HelloWorldResponse HelloWorld(ServiceReference1.HelloWorldRequest request);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/HelloWorld", ReplyAction="*")]
         System.Threading.Tasks.Task<ServiceReference1.HelloWorldResponse> HelloWorldAsync(ServiceReference1.HelloWorldRequest request);
+        
+        // CODEGEN: Generating message contract since element name listInt from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Add", ReplyAction="*")]
+        ServiceReference1.AddResponse Add(ServiceReference1.AddRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Add", ReplyAction="*")]
         System.Threading.Tasks.Task<ServiceReference1.AddResponse> AddAsync(ServiceReference1.AddRequest request);
@@ -227,6 +235,20 @@ namespace ServiceReference1
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ServiceReference1.HelloWorldResponse ServiceReference1.WebServiceSoap.HelloWorld(ServiceReference1.HelloWorldRequest request)
+        {
+            return base.Channel.HelloWorld(request);
+        }
+        
+        public string HelloWorld()
+        {
+            ServiceReference1.HelloWorldRequest inValue = new ServiceReference1.HelloWorldRequest();
+            inValue.Body = new ServiceReference1.HelloWorldRequestBody();
+            ServiceReference1.HelloWorldResponse retVal = ((ServiceReference1.WebServiceSoap)(this)).HelloWorld(inValue);
+            return retVal.Body.HelloWorldResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.Threading.Tasks.Task<ServiceReference1.HelloWorldResponse> ServiceReference1.WebServiceSoap.HelloWorldAsync(ServiceReference1.HelloWorldRequest request)
         {
             return base.Channel.HelloWorldAsync(request);
@@ -237,6 +259,21 @@ namespace ServiceReference1
             ServiceReference1.HelloWorldRequest inValue = new ServiceReference1.HelloWorldRequest();
             inValue.Body = new ServiceReference1.HelloWorldRequestBody();
             return ((ServiceReference1.WebServiceSoap)(this)).HelloWorldAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ServiceReference1.AddResponse ServiceReference1.WebServiceSoap.Add(ServiceReference1.AddRequest request)
+        {
+            return base.Channel.Add(request);
+        }
+        
+        public int Add(ServiceReference1.ArrayOfInt listInt)
+        {
+            ServiceReference1.AddRequest inValue = new ServiceReference1.AddRequest();
+            inValue.Body = new ServiceReference1.AddRequestBody();
+            inValue.Body.listInt = listInt;
+            ServiceReference1.AddResponse retVal = ((ServiceReference1.WebServiceSoap)(this)).Add(inValue);
+            return retVal.Body.AddResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

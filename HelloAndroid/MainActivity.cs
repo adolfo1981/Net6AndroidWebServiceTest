@@ -19,6 +19,9 @@ namespace HelloAndroid
             try
             {
                 var soapClient = new WebServiceSoapClient(WebServiceSoapClient.EndpointConfiguration.WebServiceSoap);
+                //Sync test
+                //var helloResponse = soapClient.HelloWorld();
+                //Async test
                 var helloResponse = await soapClient.HelloWorldAsync();
             }
             catch (System.Exception ex)
